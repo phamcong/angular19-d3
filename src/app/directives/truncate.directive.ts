@@ -34,7 +34,40 @@ export class TruncateDirective implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.checkAndHandleOverflow();
+    setTimeout(() => {
+      // Get line height and calculate heights
+      const computedStyle = window.getComputedStyle(this.textContainer);
+      const lineHeight = parseFloat(computedStyle.lineHeight) || 20;
+      const maxAllowedHeight = lineHeight * this.truncateLimit;
+
+      // Temporarily remove line clamp
+      this.renderer.removeStyle(this.textContainer, '-webkit-line-clamp');
+      this.renderer.removeStyle(this.textContainer, 'display');
+      this.renderer.setStyle(this.textContainer, 'display', 'block');
+
+      // Get the actual content height
+      const contentHeight = this.textContainer.getBoundingClientRect().height;
+
+      // Restore line clamp
+      this.renderer.removeStyle(this.textContainer, 'display');
+      this.renderer.setStyle(this.textContainer, 'display', '-webkit-box');
+      this.renderer.setStyle(
+        this.textContainer,
+        '-webkit-line-clamp',
+        this.truncateLimit
+      );
+
+      console.log('Line height:', lineHeight);
+      console.log('Max allowed height:', maxAllowedHeight);
+      console.log('Content height:', contentHeight);
+
+      // Show button if content exceeds max allowed height
+      if (contentHeight > maxAllowedHeight + 1) {
+        this.renderer.setStyle(this.toggleButton, 'display', 'inline');
+      } else {
+        this.renderer.setStyle(this.toggleButton, 'display', 'none');
+      }
+    }, 100);
   }
 
   private initializeTruncateLimit(): void {
@@ -78,13 +111,13 @@ export class TruncateDirective implements OnInit, AfterViewInit {
 
   private applyContainerStyles(): void {
     const styles = {
-      'display': '-webkit-box',
+      display: '-webkit-box',
       '-webkit-box-orient': 'vertical',
-      'overflow': 'hidden',
+      overflow: 'hidden',
       'word-break': 'break-word',
       'text-overflow': 'ellipsis',
       'white-space': 'normal',
-      'line-height': '1.2em'
+      'line-height': '1.2em',
     };
 
     Object.entries(styles).forEach(([property, value]) => {
@@ -93,7 +126,11 @@ export class TruncateDirective implements OnInit, AfterViewInit {
   }
 
   private setContainerContent(): void {
-    this.renderer.setProperty(this.textContainer, 'textContent', this.originalText);
+    this.renderer.setProperty(
+      this.textContainer,
+      'textContent',
+      this.originalText
+    );
     this.renderer.appendChild(this.el.nativeElement, this.textContainer);
   }
 
@@ -106,10 +143,10 @@ export class TruncateDirective implements OnInit, AfterViewInit {
   private applyToggleButtonStyles(): void {
     const styles = {
       'text-decoration': 'none',
-      'cursor': 'pointer',
+      cursor: 'pointer',
       'margin-left': '4px',
-      'display': 'none',
-      'color': '#0066cc'
+      display: 'none',
+      color: '#0066cc',
     };
 
     Object.entries(styles).forEach(([property, value]) => {
@@ -141,7 +178,10 @@ export class TruncateDirective implements OnInit, AfterViewInit {
     this.renderer.removeStyle(this.textContainer, 'max-height');
   }
 
-  private calculateHeights(): { maxAllowedHeight: number; actualHeight: number } {
+  private calculateHeights(): {
+    maxAllowedHeight: number;
+    actualHeight: number;
+  } {
     const computedStyle = window.getComputedStyle(this.textContainer);
     const lineHeight = parseInt(computedStyle.lineHeight) || 20;
     const maxAllowedHeight = lineHeight * this.truncateLimit;
@@ -169,7 +209,11 @@ export class TruncateDirective implements OnInit, AfterViewInit {
     if (expanded) {
       this.removeClampStyles();
     } else {
-      this.renderer.setStyle(this.textContainer, '-webkit-line-clamp', this.truncateLimit);
+      this.renderer.setStyle(
+        this.textContainer,
+        '-webkit-line-clamp',
+        this.truncateLimit
+      );
       this.renderer.setStyle(
         this.textContainer,
         'max-height',
