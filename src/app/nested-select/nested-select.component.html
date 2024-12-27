@@ -1,0 +1,18 @@
+<mat-form-field class="mca-nested-select-input" appearance="outline" (click)="openDropdown($event)">
+  <mat-label>{{ label }}</mat-label>
+  <input matInput
+         [value]="displayValue"
+         readonly
+         #trigger>
+</mat-form-field>
+
+<ng-template #dropdownTemplate>
+  <div class="select-panel">
+    <app-nested-tree
+      [multiple]="multiple"
+      [dataSource]="dataSource"
+      [(ngModel)]="value"
+      (ngModelChange)="onTreeSelectionChange($event)">
+    </app-nested-tree>
+  </div>
+</ng-template>

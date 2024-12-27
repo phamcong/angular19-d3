@@ -31,6 +31,14 @@ app-nested-tree {
     color: your-selected-color;
   }
 
+  .tree-container {
+    overflow: auto;
+  }
+
+  .filter-input {
+    width: 100%;
+  }
+
   .mat-tree-node {
     cursor: pointer;
 

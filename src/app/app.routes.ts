@@ -4,7 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { NestedTreeComponent } from './nested-tree/nested-tree.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'nested-tree', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'd3-viz', component: D3VizComponent },
   { path: 'nested-tree', component: NestedTreeComponent },

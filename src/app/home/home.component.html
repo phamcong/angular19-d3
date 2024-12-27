@@ -1,12 +1,8 @@
-<div truncate style="width: 300px; margin-bottom: 20px">
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem
-  ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-</div>
-<div truncateManual [truncateLimit]="4" style="width: 300px; margin-bottom: 20px">
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem
-  ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-</div>
-<div style="width: 300px">
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem
-  ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+<div style="width: 300px; padding: 20px">
+  <app-nested-select [dataSource]="treeData" [multiple]="multiple" [(ngModel)]="selectedValues"
+    (ngModelChange)="onSelectionChange($event)" label="Select items">
+  </app-nested-select>
+  <app-nested-select [dataSource]="treeData" [(ngModel)]="selectedValue" (ngModelChange)="onSelectionChange($event)"
+    label="Select item">
+  </app-nested-select>
 </div>

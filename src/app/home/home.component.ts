@@ -1,12 +1,56 @@
 import { Component } from '@angular/core';
-import { TruncateDirective } from '../directives/truncate.directive';
-import { TruncateManualDirective } from '../directives/truncate-manual.directive';
+import { FormsModule } from '@angular/forms';
+import { FoodNode } from '../nested-tree/nested-tree.component';
+import { NestedSelectComponent } from '../nested-select/nested-select.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   standalone: true,
-  imports: [TruncateDirective, TruncateManualDirective],
+  imports: [NestedSelectComponent, FormsModule],
 })
-export class HomeComponent { }
+export class HomeComponent {
+  treeData: FoodNode[] = [
+    {
+      name: 'Fruit',
+      value: 'fruit',
+      children: [
+        { name: 'Apple', value: 'apple' },
+        { name: 'Banana', value: 'banana' },
+        { name: 'Fruit loops', value: 'fruit-loops' }
+      ],
+    },
+    {
+      name: 'Vegetable',
+      value: 'vegetable',
+      children: [
+        { name: 'Tomato', value: 'tomato' },
+        { name: 'Potato', value: 'potato' },
+        {
+          name: 'Green',
+          value: 'green',
+          children: [
+            { name: 'Lettuce', value: 'lettuce' },
+            { name: 'Spinach', value: 'spinach' },
+            { name: 'Cucumber', value: 'cucumber' }
+          ]
+        }
+      ]
+    }
+  ];
+
+  selectedValue: string = 'apple';
+  selectedValues: string[] = ['apple', 'banana'];
+  multiple = true;
+
+  onSelectionChange(values: string | string[]) {
+    if (this.multiple) {
+      console.log('Multiple selection:', values as string[]);
+      this.selectedValues = values as string[];
+    } else {
+      console.log('Single selection:', values as string);
+      this.selectedValue = values as string;
+    }
+  }
+}
