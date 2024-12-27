@@ -11,25 +11,16 @@
   Independent parent-child selection
 </mat-checkbox>
 
-<mat-chip-listbox *ngIf="checklistSelection.selected.length > 0" class="mb-4">
-  <mat-chip *ngFor="let node of checklistSelection.selected" (removed)="leafItemSelectionToggle(node)">
-    {{node.name}}
-    <button matChipRemove>
-      <mat-icon>cancel</mat-icon>
-    </button>
-  </mat-chip>
-</mat-chip-listbox>
-
+<div style="padding: 16px;">
+  <app-breadcrumbs [selectedNodes]="checklistSelection.selected" [treeData]="dataSource"></app-breadcrumbs>
+</div>
 
 <mat-tree #tree [dataSource]="dataSource" [childrenAccessor]="childrenAccessor">
   <!-- Leaf nodes -->
-  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding 
-    (click)="!multiple && selectNode(node)"
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding (click)="!multiple && selectNode(node)"
     [class.not-selectable]="node.selectable === false">
-    <mat-checkbox *ngIf="multiple"
-      [checked]="checklistSelection.isSelected(node)"
-      [disabled]="node.selectable === false"
-      (change)="leafItemSelectionToggle(node)">
+    <mat-checkbox *ngIf="multiple" [checked]="checklistSelection.isSelected(node)"
+      [disabled]="node.selectable === false" (change)="leafItemSelectionToggle(node)">
     </mat-checkbox>
     <button mat-icon-button disabled></button>
     <span [class.selected]="!multiple && checklistSelection.isSelected(node)">{{node.name}}</span>
@@ -43,15 +34,11 @@
         {{tree.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
       </mat-icon>
     </button>
-    <mat-checkbox *ngIf="multiple"
-      [checked]="independentParentChildSelection ? 
+    <mat-checkbox *ngIf="multiple" [checked]="independentParentChildSelection ? 
                  checklistSelection.isSelected(node) : 
-                 descendantsAllSelected(node)"
-      [indeterminate]="!independentParentChildSelection && 
-                       descendantsPartiallySelected(node)"
-      [disabled]="node.selectable === false"
-      (change)="parentItemSelectionToggle(node)"
-      (click)="$event.stopPropagation()">
+                 descendantsAllSelected(node)" [indeterminate]="!independentParentChildSelection && 
+                       descendantsPartiallySelected(node)" [disabled]="node.selectable === false"
+      (change)="parentItemSelectionToggle(node)" (click)="$event.stopPropagation()">
     </mat-checkbox>
     {{node.name}}
   </mat-tree-node>

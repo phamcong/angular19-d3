@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { NestedTreeControl } from '@angular/cdk/tree';
-import { NgFor, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,12 +10,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTree, MatTreeModule } from '@angular/material/tree';
+import { BreadcrumbsComponent } from '../breadcumns/breadcrumbs.component';
 
 /**
  * Food data with nested structure.
  * Each node has a name and an optional list of children.
  */
-interface FoodNode {
+export interface FoodNode {
   name: string;
   children?: FoodNode[];
   selectable?: boolean;
@@ -88,10 +89,10 @@ function filterTreeData(data: FoodNode[], filterText: string): FoodNode[] {
     MatIconModule,
     MatButtonModule,
     NgIf,
-    NgFor,
     MatCheckboxModule,
     FormsModule,
-    MatChipsModule
+    MatChipsModule,
+    BreadcrumbsComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
