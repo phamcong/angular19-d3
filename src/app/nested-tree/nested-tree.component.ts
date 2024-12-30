@@ -100,6 +100,10 @@ export class NestedTreeComponent implements ControlValueAccessor {
     return this._dataSource;  
   }
 
+  @Input() withFilter = false;
+  
+  @Input() withBreadcrumbs = true;
+
   childrenAccessor = (node: FoodNode) => node.children ?? [];
 
   hasChild = (_: number, node: FoodNode) => !!node.children && node.children.length > 0;

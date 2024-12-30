@@ -1,8 +1,40 @@
-<div style="width: 300px; padding: 20px">
-  <app-nested-select [dataSource]="treeData" [multiple]="multiple" [(ngModel)]="selectedValues"
-    (ngModelChange)="onSelectionChange($event)" label="Select items">
+<div style="display: flex; flex-direction: row; gap: 20px; margin: 0 auto;">
+  <div truncateManual style="max-width: 500px; width: 50%;">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+  </div>
+  <div style="max-width: 500px; width: 50%;">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+  </div>
+</div>
+<div style="width: 300px; padding: 20px"> 
+  <app-nested-select
+    [dataSource]="treeData"
+    [multiple]="multiple"
+    [(ngModel)]="selectedValues"
+    (ngModelChange)="onSelectionChange($event)"
+    label="Select items"
+  >
   </app-nested-select>
-  <app-nested-select [dataSource]="treeData" [(ngModel)]="selectedValue" (ngModelChange)="onSelectionChange($event)"
-    label="Select item">
+  <app-nested-select
+    [dataSource]="treeData"
+    [(ngModel)]="selectedValue"
+    (ngModelChange)="onSelectionChange($event)"
+    label="Select item"
+  >
   </app-nested-select>
+  <app-nested-tree-search
+    [dataSource]="treeData"
+    [(ngModel)]="selectedValue"
+    [multiple]="false"
+    (ngModelChange)="onSelectionChange($event)"
+    label="Select item"
+  >
+  </app-nested-tree-search>
 </div>

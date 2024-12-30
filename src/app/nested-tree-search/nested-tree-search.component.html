@@ -1,0 +1,32 @@
+<div class="search-container">
+  <mat-form-field #searchInput class="search-input" appearance="fill">
+    <mat-label>Search</mat-label>
+    <input matInput
+           [(ngModel)]="searchText"
+           (input)="onSearchInput($event)"
+           >
+    <button mat-icon-button matSuffix>
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-chip-set *ngIf="multiple && value?.length">
+    <mat-chip *ngFor="let item of value" 
+              (removed)="removeItem(item)">
+      {{item.name}}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-set>
+</div>
+
+<ng-template #dropdownTemplate>
+  <div class="search-panel" [style.width.px]="triggerRect?.width">
+    <app-nested-tree
+      [dataSource]="filteredDataSource"
+      [(ngModel)]="value"
+      [multiple]="multiple"
+      (ngModelChange)="onTreeSelectionChange($event)"
+    >
+    </app-nested-tree>
+  </div>
+</ng-template>

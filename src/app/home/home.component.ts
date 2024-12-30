@@ -2,13 +2,20 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FoodNode } from '../nested-tree/nested-tree.component';
 import { NestedSelectComponent } from '../nested-select/nested-select.component';
+import { NestedTreeSearchComponent } from '../nested-tree-search/nested-tree-search.component';
+import { TruncateManualDirective } from '../directives/truncate-manual.directive';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   standalone: true,
-  imports: [NestedSelectComponent, FormsModule],
+  imports: [
+    NestedSelectComponent,
+    FormsModule,
+    NestedTreeSearchComponent,
+    TruncateManualDirective,
+  ],
 })
 export class HomeComponent {
   treeData: FoodNode[] = [
@@ -18,7 +25,7 @@ export class HomeComponent {
       children: [
         { name: 'Apple', value: 'apple' },
         { name: 'Banana', value: 'banana' },
-        { name: 'Fruit loops', value: 'fruit-loops' }
+        { name: 'Fruit loops', value: 'fruit-loops' },
       ],
     },
     {
@@ -33,11 +40,11 @@ export class HomeComponent {
           children: [
             { name: 'Lettuce', value: 'lettuce' },
             { name: 'Spinach', value: 'spinach' },
-            { name: 'Cucumber', value: 'cucumber' }
-          ]
-        }
-      ]
-    }
+            { name: 'Cucumber', value: 'cucumber' },
+          ],
+        },
+      ],
+    },
   ];
 
   selectedValue: string = 'apple';

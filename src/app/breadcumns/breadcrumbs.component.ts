@@ -19,7 +19,6 @@ import { FoodNode } from '../nested-tree/nested-tree.component';
   styles: [`
     .breadcrumbs {
       padding: 8px 0;
-      margin-bottom: 16px;
     }
     
     .breadcrumb-path {
