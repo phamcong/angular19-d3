@@ -1,0 +1,39 @@
+:host {
+  .truncate-text {
+    max-width: 100%;
+    width: 100%;
+    position: relative;
+    display: -webkit-box;
+    -webkit-line-clamp: var(--max-lines);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 20px;
+  }
+
+  .toggle-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: white;
+    cursor: pointer;
+    z-index: 1000;
+    line-height: 20px;
+
+    .toggle-text {
+      color: blue;
+    }
+  }
+
+  .line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Number of lines to show */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 20px;
+    
+    &.expanded {
+      -webkit-line-clamp: unset;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+<div class="truncate-text">
+  <div class="line-clamp" [class.expanded]="expanded">
+    {{ text }}
+  </div>
+  <div *ngIf="isTruncated" class="toggle-btn">
+    <span *ngIf="!expanded">...</span>
+    <span class="toggle-text" (click)="toggleText()">{{
+      expanded ? "Show less" : "Show more"
+    }}</span>
+  </div>
+</div>

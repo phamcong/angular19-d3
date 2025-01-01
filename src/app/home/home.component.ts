@@ -4,6 +4,9 @@ import { FoodNode } from '../nested-tree/nested-tree.component';
 import { NestedSelectComponent } from '../nested-select/nested-select.component';
 import { NestedTreeSearchComponent } from '../nested-tree-search/nested-tree-search.component';
 import { TruncateManualDirective } from '../directives/truncate-manual.directive';
+import { TruncateDirective } from '../directives/truncate.directive';
+import { AutocompleteComponent } from '../autocomplete/autocomplete.component';
+import { TruncateComponent } from '../truncate/truncate.component';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +17,9 @@ import { TruncateManualDirective } from '../directives/truncate-manual.directive
     NestedSelectComponent,
     FormsModule,
     NestedTreeSearchComponent,
-    TruncateManualDirective,
+    TruncateDirective,
+    AutocompleteComponent,
+    TruncateComponent,
   ],
 })
 export class HomeComponent {
