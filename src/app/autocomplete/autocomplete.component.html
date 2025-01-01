@@ -1,0 +1,40 @@
+<form>
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>Search</mat-label>
+    <input type="text"
+           placeholder="Start typing..."
+           matInput
+           [formControl]="searchControl"
+           #trigger="matAutocompleteTrigger"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" 
+                     (optionSelected)="onOptionSelected($event, trigger)">
+      <ng-container *ngFor="let option of filteredOptions$ | async">
+        <mat-optgroup *ngIf="option.children?.length" [label]="option.name">
+          <ng-container *ngTemplateOutlet="recursiveOptions; context:{ $implicit: option.children, level: 1 }">
+          </ng-container>
+        </mat-optgroup>
+        <mat-option *ngIf="!option.children?.length" 
+                   [value]="option.name">
+          {{option.name}}
+        </mat-option>
+      </ng-container>
+
+      <ng-template #recursiveOptions let-options let-level="level">
+        <ng-container *ngFor="let option of options">
+          <mat-optgroup *ngIf="option.children?.length" 
+                      [label]="option.name"
+                      [style.paddingLeft.px]="level * 24">
+            <ng-container *ngTemplateOutlet="recursiveOptions; context:{ $implicit: option.children, level: level + 1 }">
+            </ng-container>
+          </mat-optgroup>
+          <mat-option *ngIf="!option.children?.length" 
+                    [value]="option.name"
+                    [style.paddingLeft.px]="level * 24">
+            {{option.name}}
+          </mat-option>
+        </ng-container>
+      </ng-template>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
