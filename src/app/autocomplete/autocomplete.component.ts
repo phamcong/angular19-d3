@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-autocomplete',
@@ -27,6 +28,7 @@ import { map, startWith } from 'rxjs/operators';
     MatAutocompleteModule,
     ReactiveFormsModule,
     MatOptionModule,
+    MatIconModule,
   ],
   styleUrls: ['./autocomplete.component.scss'],
 })
@@ -178,6 +180,7 @@ export class AutocompleteComponent implements OnInit {
           ...node,
           level,
           children: childMatches,
+          expanded: true,
         };
         filtered.push(clone);
       }
@@ -198,5 +201,9 @@ export class AutocompleteComponent implements OnInit {
 
   onPanelClosed() {
     // Optional cleanup if needed
+  }
+
+  toggleNode(node: any) {
+    node.expanded = !node.expanded;
   }
 }
