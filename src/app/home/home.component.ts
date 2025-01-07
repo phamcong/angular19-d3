@@ -7,6 +7,8 @@ import { TruncateManualDirective } from '../directives/truncate-manual.directive
 import { TruncateDirective } from '../directives/truncate.directive';
 import { AutocompleteComponent } from '../autocomplete/autocomplete.component';
 import { TruncateComponent } from '../truncate/truncate.component';
+import { TruncateHoverDirective } from '../directives/truncate-hover.directive';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +22,8 @@ import { TruncateComponent } from '../truncate/truncate.component';
     TruncateDirective,
     AutocompleteComponent,
     TruncateComponent,
+    MatTooltipModule,
+    TruncateHoverDirective
   ],
 })
 export class HomeComponent {
@@ -55,6 +59,7 @@ export class HomeComponent {
   selectedValue: string = 'apple';
   selectedValues: string[] = ['apple', 'banana'];
   multiple = true;
+  longText = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.';
 
   onSelectionChange(values: string | string[]) {
     if (this.multiple) {
